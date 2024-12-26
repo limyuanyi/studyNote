@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表排序</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>人員列表</h1>
+        <input type="text" placeholder="Enter name" v-model="keyword"></input>
+        <button @click="sortType = 2">年齡升序</button>
+        <button @click="sortType = 1">年齡降序</button>
+        <button @click="sortType = 0">原順序</button>
+        <ul>
+            <li v-for="(p,index) of fillPersons" :key="p.id">
+                {{p.name}} - {{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="application/javascript">
+
+        //用computed實現
+        new Vue({
+            el:'#root',
+            data:{
+                sortType:0,//0代表原順序，1降 2升
+                keyword:'',
+                persons:[
+                    {id:'001',name:"YY",age:52},
+                    {id:'002',name:"HY",age:21},
+                    {id:'003',name:"HC",age:13},
+                    {id:'004',name:"GS",age:19}
+                ],
+            },
+            computed:{
+                fillPersons(){
+                    const arr = this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyword) !== -1
+                    })
+                    //判斷是否需要排序
+                    if(this.sortType){
+                        arr.sort((p1,p2)=>{
+                            return this.sortType === 1 ? p2.age-p1.age : p1.age - p2.age
+                        })
+                    }
+
+                    return arr
+                }
+            }
+        })
+    </script>
+</body>
+</html>

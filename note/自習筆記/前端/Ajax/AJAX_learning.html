@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Asynchronous JavaScript And XML
+        //http協議
+            //請求報文
+                //格式 & 參數
+                /*
+                    4部分
+                    行  (請求類型)(url)(HTTP請求版本) *POST /s?ie=utf-8 HTTP/1.1
+                    頭  Host: ..
+                        Cookie: ...
+                        Content-type: ...
+                        User-Agent: ...
+                    空行
+                    體  (請求體) *usernname=admin&password=admin
+                */
+            //響應報文
+                /*
+                    行  HTTP/1.1 200 OK
+                    頭  Content-Type: ...
+                        Content-length: ...
+                        Content-encoding: ...
+                    空行
+                    體  <html>
+                            <head>
+                            </head>
+                            <body>
+                            </body>
+                        </html>
+                */
+        //無需刷新頁面與服務器通信
+        //允許根據用戶事件更新部分頁面内容
+        
+        // express框架
+            //1.引入express
+            //2.創建應用對象
+            //3.創建路由器規劃
+            //4.監聽端口啓動服務
+
+        //XMLHttpRequest()
+            //獲取元素對象
+            //綁定事件
+                //1.創建對象
+                //2.初始化，設置類型 & URL 
+                    //xhr.open('類型','url地址');
+                    //js: app.all('/',(request,response)=>{ })
+                //3.發送
+                    //xhr.send()
+                //4.事件綁定
+                    //onreadystatechange
+                        //0 未初始化
+                        //1 open()調用完畢
+                        //2 send()調用完畢
+                        //3 服務端返回部分結果
+                        //4 服務端返回全部結果
+                        /*
+                            xhr.onreadystatechange = function(){
+                                if(xhr.readystate === 4){
+                                    判斷響應200 404 403 401 500
+                                    if(xhr.status>=200 && xhr.status < 300){
+                                        //處理結果 行 頭 空行 體
+                                        //1.響應行
+                                        xhr.status 狀態碼
+                                        xhr.statsText 狀態字符串
+                                        xhr.getAllResponseHeaders() 所有響應頭
+                                        xhr.response 響應體
+                                    }else{
+                                    }
+                                }
+                            }
+                        */
+         //設置響應體數據類型
+         //手動轉換 & 自動轉換
+         //nodemon
+         //延遲響應 & 超時設置
+            //xhr.timeout()
+            //xhr.ontimeout()超時回調
+        //網絡異常回調
+            //xhr.onerror()
+        //點擊取消
+            //x.abort()
+        // $.ajax(){}
+        //axios發送方式get/post
+        //fetch()對象發送請求
+        //同源策略（same-origin-policy）
+        //JSONP（跨域解決方案，only for 'get'）
+        //jQuery發送（callback參數）
+        //CORS(cross-origin resource sharing)(跨域解決方法)
+            //response.setHeader("",,"*")
+                //Access-Control-Allow_Origin
+                //Access-Control-Allow-Headers
+                //Access-Control-Allow-Method
+                //...
+        //file請求向http發請求 =》跨域
+    </script>
+</body>
+</html>

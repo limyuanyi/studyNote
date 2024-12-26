@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定義指令</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+    <script src="./js/dayjs.min.js"></script>
+</head>
+<body>
+    <div id="root">
+        <hello></hello>
+        <school></school>
+    </div>
+
+    <div id="root2"> 
+        <hr/>
+        <hello></hello>
+        <student></student>
+    </div>
+
+
+</body>
+    <script type="application/javascript">
+        const school = Vue.extend({
+            template:`
+            <div>
+                <h2>學校名字{{schoolName}}</h2>
+                <h2>學校區域{{addr}}</h2>
+            </div>
+            `,
+            data(){
+                return {
+                    schoolName:'寬柔',
+                    addr:'古來'
+                }
+            }
+        })
+
+        const student = Vue.extend({
+            template:`
+                <div>
+                    <h2>學生名字:{{studentName}}</h2>
+                    <h2>學生年齡{{age}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    studentName:"YY",
+                    age:22
+                }
+            }
+        })
+
+        const hello = Vue.extend({
+            template:`
+                <h2 >資訊</h2>
+            `,
+        })
+
+        Vue.component('hello',hello)
+
+        new Vue({
+            el:'#root',
+            components:{
+                school,
+                student
+            }
+        })
+
+        new Vue({
+            el:'#root2',
+            components:{
+                student
+            }
+        })
+    </script>
+</html>

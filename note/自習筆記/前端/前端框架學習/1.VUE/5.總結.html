@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>總結</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>學生信息</h1>
+        <button @click="student.age++">年齡+1</button>
+        <button @click="addSex">添加性別屬性，默認值為男</button>
+        <button @click="student.sex = '未知'">修改性別</button>
+        <button @click="addFriend">在列表首位添加一個朋友</button>
+        <button @click="updateFirstName">修改第一個朋友的名字為:張三</button>
+        <button @click="addHobby">添加一個愛好</button>
+        <button @click="updateHobby">修改第一個愛號為：開車</button>
+        <h3>姓名:{{student.name}}</h3>
+        <h3>年齡：{{student.age}}</h3>
+        <h3 v-if="student.sex">性別：{{student.sex}}</h3>
+        <h3>愛好</h3>
+        <ul>
+            <li v-for="(s,idx) of student.hobby" :key="s.id"> 
+                {{s}}
+            </li>
+        </ul>
+        <h3>朋友：</h3>
+        <ul>
+            <li v-for="(f,index) in student.friends" :key="index">
+                {{f.name}} -- {{f.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="application/javascript">
+        new Vue({
+            el:"#root",
+            data:{
+                student:{
+                    name:'tom',
+                    age:22,
+                    hobby:['唱歌','打球','游泳'],
+                    friends:[
+                        {name:'jerry',age:35},
+                        {name:'Tony',age:31}
+                    ]
+                }
+            },
+            methods:{
+                addSex(){
+                    Vue.set(this.student,'sex','男');
+                    //vm.$set()
+                },
+                addFriend(){
+                    this.student.friends.unshift({name:'jack',age:70})
+                    //不能賦值修改
+                },
+                updateFirstName(){
+                    this.student.friends[0].name = '張三';
+                    this.student.friends[0].age = 28;
+                },
+                addHobby(){
+                    this.student.hobby.push('開車')
+                },
+                updateHobby(){
+                    this.student.hobby.splice(0,1,'開車')
+                    //Vue.set()
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

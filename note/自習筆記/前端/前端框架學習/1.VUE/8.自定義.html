@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定義指令</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+    <script src="./js/dayjs.min.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2 v-big-number="n">{{n}}</h2>
+        <button @click="n++">n+1</button>
+        <input v-fbind:value="n" type="text"></input>
+    </div>
+</body>
+
+    <script type="application/javascript">
+        new Vue({
+            el:'#root',
+            data:{
+                n:1,
+            },
+            directives:{
+
+                //big函數何時被調用?1.指令與元素成功綁定時(一上來)，2.指令所在的模板被重新解析時
+                'big-number':function(element,binding){
+                    element.innerText = binding.value * 10
+                },
+                fbind:{
+                    bind(element,binding){
+                        element.value = binding.value
+                    },
+                    inserted(element,binding){
+                        element.focus()
+                    },
+                    update(){
+                        element.value = binding.value
+                    }
+                }
+            }
+        })
+    </script>
+</html>

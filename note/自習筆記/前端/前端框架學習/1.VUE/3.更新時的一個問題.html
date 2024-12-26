@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新時的一個問題</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>人員列表</h1>
+        <button @click="updateYY">更新YY的信息</button>
+        <ul>
+            <li v-for="(p,index) of persons" :key="p.id">
+                {{p.name}} - {{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="application/javascript">
+
+        //用computed實現
+        new Vue({
+            el:'#root',
+            data:{
+                persons:[
+                    {id:'001',name:"YY",age:52},
+                    {id:'002',name:"HY",age:21},
+                    {id:'003',name:"HC",age:13},
+                    {id:'004',name:"GS",age:19}
+                ],
+            },
+            methods:{
+                updateYY(){
+                    // this.persons[0].name = '林源毅',
+                    // this.persons[0].age = 22
+                    this.person[0] = {id:'001',name:"林源毅",age:22}
+                }
+            }
+        })
+    </script>
+</body>
+</html>

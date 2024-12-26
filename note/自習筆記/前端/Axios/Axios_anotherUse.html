@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">基本使用</h2>
+        <button class="btn-primary">發送GET請求</button>
+        <button class="btn-warning">發送POST請求</button>
+        <button class="btn-success">發送PUT請求</button>
+        <button class="btn-danger">發送DELETE請求</button>
+    </div>
+    <script>
+        const btn = document.querySelectorAll('button');
+
+        btn[0].onclick = function(){
+            //axios.request(config)
+            axios.request({
+                method:'GET',
+                url:'http://localhost:3000/comments'  
+            }).then(response =>{
+                console.log(response);
+            });
+        }
+        btn[1].onclick = function(){
+            //axios.post(url,data,config[])
+            axios.post(
+                'http://localhost:3000/comments',
+                {
+                    "body":"abcd",
+                    "postId":2
+                }).then(response =>{
+                    console.log(response);
+                })
+        }
+    </script>
+</body>
+</html>

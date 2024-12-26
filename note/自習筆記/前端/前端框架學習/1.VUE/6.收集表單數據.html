@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表單數據</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+</head>
+<body>
+    <div id="root">
+        <form @submit="demo">
+            賬號：<input type="text" v-model.trim="account">
+            <br></br>
+            密碼：<input type="password" v-model="password">
+            <br></br>
+            年齡：<input type="number" v-model.number="age">
+            <br></br>
+            性別：
+            男<input type="radio" name="sex" v-model="sex" value="male">
+            女<input type="radio" name="sex" v-model="sex" value="female">
+            <br></br>
+            愛好：
+            學習<input type="checkbox" v-model="hobby" value="study">
+            打游戲<input type="checkbox" v-model="hobby" value="game">
+            吃飯<input type="checkbox" v-model="hobby" value="eat">
+            <br></br>
+            所屬校區
+            <select v-model="city">
+                <option>請選擇校區</option>
+                <option value="hualian">花蓮</option>
+                <option value="taibei">臺北</option>
+                <option value="gaoxiong">高雄</option>
+                <option value="tainan">臺南</option>
+            </select>
+            <br></br>
+            其他信息:
+            <textarea v-model.lazy="other"></textarea>
+            <br></br>
+            <input type="checkbox" v-model="agree">閲讀並接受<a href="http://atguigu.com">《用戶協議》</a>
+            <button>提交</button>
+        </form>
+    </div>
+</body>
+
+    <script type="application/javascript">
+        new Vue({
+            el:"#root",
+            data:{
+                account:'',
+                password:'',
+                age:0,
+                sex:'',
+                hobby:[],
+                city:'',
+                other:'',
+                agree:''
+            },
+            methods:{
+                demo(){
+                    console.log(JSON.stringify(this.data))
+                }
+            }
+        })
+
+    </script>
+</html>

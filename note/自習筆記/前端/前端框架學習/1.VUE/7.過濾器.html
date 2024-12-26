@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>過濾器</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+    <script src="./js/dayjs.min.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>顯示格式化後的時間</h2>
+        <h3>現在是：{{fmtTime}}</h3>
+        <!-- 過濾器實現 -->
+        <h3>現在是：{{time | timeFormater}}</h3>
+
+        <h3>現在是：{{time | timeFormater('YYYY_MM_DD') | mySilce}}</h3>
+    </div>
+</body>
+    <script type="application/javascript">
+        new Vue({
+            el:'#root',
+            data:{
+                time:3253252351232
+            },
+            computed:{
+                fmtTime(){
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            filters:{
+                timeFormater(value,str='YYYY-MM-DD HH:mm:ss'){
+                    return dayjs(value).format(str)
+                },
+                mySlice(value){
+                    return value.slice(0,4)
+                }
+            }
+        })
+
+        //全局過濾
+        Vue.filters('mySlice',function(){
+            
+        })
+    </script>
+</html>

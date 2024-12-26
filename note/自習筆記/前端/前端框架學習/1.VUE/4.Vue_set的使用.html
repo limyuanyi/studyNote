@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.set()使用</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>學校名稱:{{name}}</h2>
+        <h2>學習地址：{{addr}}</h2>
+        <hr/>
+        <h1>學生信息</h1>
+        <button @click="addSex">添加一個性別屬性，默認值為男</button>
+        <h2>姓名:{{student.name}}</h2>
+        <h2>年齡:真實{{student.age.rAge}}. 對外{{student.age.sAge}}</h2>
+        <h2 v-if="student.sex">性別:{{student.sex}}</h2>
+
+        <ul>
+            <li v-for="(f,index) in student.friends" :key="index">
+                {{f.name}} -- {{f.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="application/javascript">
+        new Vue({
+            el:"#root",
+            data:{
+                name:'寬柔',
+                addr:"北京",
+                student:{
+                    name:'tom',
+                    age:{
+                        rAge:40,
+                        sAge:29,
+                    },
+                    friends:[
+                        {name:'jerry',age:35},
+                        {name:'Tony',age:31}
+                    ]
+                }
+            },
+            methods:{
+                addSex(){
+                    Vue.set(this.student,'sex','男')
+                    //this.$set()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

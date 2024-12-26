@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">基本使用</h2>
+        <button class="btn-primary">發送GET請求</button>
+        <button class="btn-warning">發送POST請求</button>
+        <button class="btn-success">發送PUT請求</button>
+        <button class="btn-danger">發送DELETE請求</button>
+    </div>
+    <script>
+        //構造函數
+        function Axios(config){
+            this.config = config;
+            this.interceptors = {
+                request: new InterceptorManager(),
+                response: new InterceptorManager(),
+            }
+        }
+
+        Axios.prototype.request = function(config){
+            //創建一個promise對象
+            let promise = Promise.resolve(config);
+            //創建一個數組
+            const chains = [dispatchRequest,undefined];
+            //處理攔截器
+            //請求攔截器 壓入chains的前面
+            this.interceptors.request.handlers.forEach(item => {
+                chains.unshift(item.fulfilled,item.rejected);
+            });
+
+            //響應攔截器
+            this.interceptors.response.handlers.forEach(item => {
+                chains.push(item.fulfilled,item.rejected);
+            });
+            
+            //遍歷
+            while(chains.length > 0){
+                promise = promise.then(chains.shift(),chains.shift());
+            }
+
+            return promise;
+        }
+
+        function dispatchRequest(config){
+            return new Promise((resolve,reject) => {
+                resolve({
+                    status: 200,
+                    statusText: 'OK'
+                });
+            })
+        }
+
+        //創建實例
+        let context = new Axios({});
+        //創建axios函數
+        let axios = Axios.prototype.request.bind(context);
+        //將context 屬性 config interceptor 添加至 axios 函數對象身上
+        Object.keys(context).forEach(key => {
+            axios[key] = context[key];
+        })
+
+        function InterceptorManager(){
+            this.handlers = [];
+        }
+
+        InterceptorManager.prototype.use = function(fulfilled,rejected){
+            this.handlers.push({
+                fulfilled,
+                rejected
+            })
+        }
+
+        //測試代碼
+        // 設置請求攔截器
+        axios.interceptors.request.use(function one(config) {
+            console.log('請求攔截器成功-1號');
+            return config;
+        }, function one(error) {
+            console.log('請求攔截器失敗-1號');
+            return Promise.reject(error);
+        });
+        axios.interceptors.request.use(function two(config) {
+            console.log('請求攔截器成功-2號');
+            return config;
+        }, function two(error) {
+            console.log('請求攔截器失敗-2號');
+            return Promise.reject(error);
+        });
+
+        //設置響應攔截器
+        axios.interceptors.response.use(function (response) {
+            console.log('響應攔截器成功-1號');
+            return response;
+        }, function (error) {
+            console.log('響應攔截器失敗-1號');
+            return Promise.reject(error);
+        });
+        axios.interceptors.response.use(function (response) {
+            console.log('響應攔截器成功-2號');
+            return response;
+        }, function (error) {
+            console.log('響應攔截器失敗-2號');
+            return Promise.reject(error);
+        });
+    
+        
+        //發送請求
+        axios({
+            method:'GET',
+            url:'http://localhost:3000/posts'
+        }).then(response =>{
+            //console.log('回調成功結果');
+            console.log(response);
+        }).catch(reason =>{
+            console.log('回調失敗結果');
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <script>
+        //var & let & const(多用數組)
+        //箭頭函數
+        //this(靜態)
+        //函數形參賦初始值 
+            //function(a,b,c=10){}
+        //rest參數，放在函數形參
+            //function(a,b,...args){}
+        //[...]擴張運算符，把[數組]變爲逗號分割的[參數],放在調用實參
+            //add(...num)
+            //數組合并
+                //combine(...arr1,...arr2)
+            //克隆數組
+            //僞數組(return的是object) TO 數組
+        //symbol
+            //Symbol() & Symbol.for()
+            //數據類型USONB you are so niubility
+                //U undefined
+                //s strirng symbol
+                //o object
+                //n null number
+                //b boolean
+        //iterator
+            //for...of & for...in
+            //next方法(return object(value,done))
+                /*[Symbol.interator](){
+                    return{
+                        next: function(){
+                            ...
+                            return result={value:,done: }
+                        }
+                    }
+                }*/
+        //生成器 （解決異步編程 純回調函數 nodejs ajax ）
+            //yield
+            /*
+                function * gen(){
+                    yield 111;
+                }
+                let iterator = gen();
+                console.log(iterator.next());
+            */
+        //promise(resolve,reject) ,then方法
+            //catch
+        //Set & Map
+        //class
+            //父類繼承
+            //contructor 
+            //get & set
+                /*
+                    class Phone
+                        constructor(){}
+
+                        get(){}
+                        
+                        set(val){}
+                */
+        //數值擴展
+            //Number.EPSILON
+            //二進制(0b10101) 8進制(0o777)
+        //對象方法擴展
+        //模塊化 (export & import)
+                //export (統一，分別，默認(vue))
+                //import（通用，解構賦值，簡便(default)）&模塊引入<script src='' type="module">
+            //項目 用babel轉換引入（過時？）
+
+        //ES8
+        //async & await
+        //對象方法擴展
+            //Object.values() & .keys() & .entries() 
+    </script>
+</body>
+</html>
